@@ -72,7 +72,7 @@ class UXD_PP_Frontend {
         setcookie(
             $cookie_name,
             $hash,
-            time() + 10 * DAY_IN_SECONDS,
+            0, // Expires when the browser closes
             $path,
             $domain,
             is_ssl(),
