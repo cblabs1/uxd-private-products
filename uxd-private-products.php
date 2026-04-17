@@ -3,7 +3,7 @@
  * Plugin Name: UXD Private Products
  * Plugin URI:  https://uxd.com
  * Description: Make WooCommerce products private — hidden from all pages until a password is entered.
- * Version:     1.2.3
+ * Version:     1.2.4
  * Author:      UXD
  * Author URI:  https://uxd.com
  * Text Domain: uxd-private-products
@@ -15,7 +15,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'UXD_PP_VERSION', '1.2.3' );
+define( 'UXD_PP_VERSION', '1.2.4' );
 define( 'UXD_PP_FILE',    __FILE__ );
 define( 'UXD_PP_DIR',     plugin_dir_path( __FILE__ ) );
 define( 'UXD_PP_URL',     plugin_dir_url( __FILE__ ) );

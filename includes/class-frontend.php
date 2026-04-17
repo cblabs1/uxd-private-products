@@ -100,6 +100,8 @@ class UXD_PP_Frontend {
             
             // Clean URL. The wp-postpass cookie will handle cache bypass automatically.
             $back_url = remove_query_arg( 'uxd_pp_error', $back_url );
+            $back_url = add_query_arg( 'unlocked', time(), $back_url ); // time() ensures a completely fresh bypass
+            wp_send_json_success( [ 'redirect' => $back_url ] );
             
             wp_send_json_success( [ 'redirect' => $back_url ] );
         }
@@ -126,7 +128,7 @@ class UXD_PP_Frontend {
         if ( ! empty( $stored ) && $entered === $stored ) {
             self::grant_access( $stored );
             nocache_headers();
-            wp_safe_redirect( $back_url );
+            wp_safe_redirect( add_query_arg( 'unlocked', time(), $back_url ) );
             exit;
         }
 
