@@ -1,0 +1,378 @@
+/* ──────────────────────────────────────────────────────────────────
+   UXD Private Products — single-product password gate
+   ────────────────────────────────────────────────────────────────── */
+
+.uxd-pp-gate {
+    display: flex;
+    justify-content: center;
+    padding: 3rem 1rem;
+}
+
+.uxd-pp-gate__inner {
+    background: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 12px;
+    box-shadow: 0 4px 24px rgba(0,0,0,.08);
+    max-width: 440px;
+    width: 100%;
+    padding: 2.5rem 2rem;
+    text-align: center;
+}
+
+.uxd-pp-gate__icon {
+    display: block;
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    line-height: 1;
+}
+
+.uxd-pp-gate__title {
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin: 0 0 .5rem;
+}
+
+.uxd-pp-gate__subtitle {
+    color: #555;
+    margin: 0 0 1.5rem;
+    font-size: .95rem;
+}
+
+.uxd-pp-gate__error {
+    color: #d63638;
+    font-size: .9rem;
+    margin: .75rem 0 0;
+    background: #fef0f0;
+    border: 1px solid #f5c2c2;
+    border-radius: 4px;
+    padding: .5rem .75rem;
+    text-align: left;
+}
+
+.uxd-pp-gate__field {
+    margin-bottom: 1rem;
+}
+
+.uxd-pp-gate__field input[type="password"] {
+    width: 100%;
+    padding: .65rem 1rem;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 1rem;
+    box-sizing: border-box;
+    transition: border-color .2s;
+}
+
+.uxd-pp-gate__field input[type="password"]:focus {
+    border-color: #96588a;
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(150,88,138,.15);
+}
+
+.uxd-pp-gate__btn {
+    width: 100%;
+    padding: .75rem 1rem;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    border-radius: 6px;
+    transition: opacity .2s;
+}
+
+.uxd-pp-gate__btn:disabled {
+    opacity: .6;
+    cursor: not-allowed;
+}
+
+/* ──────────────────────────────────────────────────────────────────
+   UXD Private Products — Elementor widget
+   ────────────────────────────────────────────────────────────────── */
+
+/* ── Widget wrapper ─────────────────────────────────────────────── */
+.uxd-pp-widget-wrap {
+    position: relative;
+}
+
+/* ── Full-area translucent overlay (sits above blurred grid) ────── */
+.uxd-pp-widget-overlay {
+    position: absolute;
+    inset: 0;
+    background-color: rgba(10, 18, 40, 0.55);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    border-radius: 16px;
+    z-index: 10;
+    pointer-events: none; /* clicks pass through to the popup */
+}
+
+/* ── Centered password popup card ──────────────────────────────── */
+.uxd-pp-popup {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 20;
+    background: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 20px 60px rgba(0,0,0,.35);
+    padding: 2.25rem 2rem;
+    width: min(420px, 92vw);
+    text-align: center;
+    box-sizing: border-box;
+}
+
+.uxd-pp-popup__icon {
+    display: block;
+    font-size: 1rem;
+    line-height: 1;
+    width: 45px;
+    text-align: center;
+    margin: 0 auto 20px;
+}
+
+.uxd-pp-popup__title {
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin: 0 0 .5rem;
+    color: #1e2d50;
+    line-height: 1.3;
+}
+
+.uxd-pp-popup__subtitle {
+    font-size: .95rem;
+    color: #555;
+    margin: 0 0 1.4rem;
+    line-height: 1.5;
+}
+
+.uxd-pp-popup .uxd-pp-gate__error {
+    margin-bottom: .75rem;
+}
+
+/* ── Popup form ─────────────────────────────────────────────────── */
+.uxd-pp-popup__field {
+    margin-bottom: .85rem;
+}
+
+.uxd-pp-popup__field input[type="password"] {
+    width: 100%;
+    padding: .7rem 1rem;
+    border: 1px solid #d0d5e0;
+    border-radius: 8px;
+    font-size: 1rem;
+    box-sizing: border-box;
+    transition: border-color .2s, box-shadow .2s;
+    color: #1e2d50;
+}
+
+.uxd-pp-popup__field input[type="password"]::placeholder {
+    color: #aab0be;
+}
+
+.uxd-pp-popup__field input[type="password"]:focus {
+    border-color: #3a9ad9;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(58,154,217,.2);
+}
+
+.uxd-pp-popup__btn {
+    width: 100%;
+    padding: .75rem 1rem;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: opacity .2s, transform .1s;
+}
+
+.uxd-pp-popup__btn:hover {
+    opacity: .9;
+    transform: translateY(-1px);
+}
+
+.uxd-pp-popup__btn:disabled {
+    opacity: .6;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* ── Grid ────────────────────────────────────────────────────────── */
+.uxd-pp-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    transition: filter .3s;
+}
+
+/* When locked the grid is rendered behind the overlay — pointer events off */
+.uxd-pp-grid.uxd-pp-grid-blurred {
+    pointer-events: none;
+    user-select: none;
+}
+
+/* ── Card shell ──────────────────────────────────────────────────── */
+.uxd-pp-card {
+    display: flex;
+    flex-direction: column;
+    background-color: transparent;
+    border: 1px solid #2e3f6a;
+    border-radius: 16px;
+    overflow: hidden;
+    padding: 16px;
+    box-sizing: border-box;
+    transition: border-color .25s, box-shadow .25s;
+}
+
+.uxd-pp-card:hover {
+    border-color: #4a6090;
+    box-shadow: 0 8px 28px rgba(0,0,0,.25);
+}
+
+/* ── Image wrap (holds sale badge + white box) ───────────────────── */
+.uxd-pp-card__image-wrap {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+/* ── White rounded image container ──────────────────────────────── */
+.uxd-pp-card__image-box {
+    position: relative;
+    background-color: #ffffff;
+    border-radius: 12px;
+    height: 260px;
+    overflow: hidden;
+    padding: 12px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.uxd-pp-card__image-box a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+}
+
+.uxd-pp-card__image-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+    transition: transform .3s;
+}
+
+.uxd-pp-card:hover .uxd-pp-card__image-box img {
+    transform: scale(1.04);
+}
+
+/* ── Sale badge — top-left corner ────────────────────────────────── */
+.uxd-pp-card__sale-badge {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: #3a9ad9;
+    color: #ffffff;
+    font-size: .85rem;
+    font-weight: 700;
+    line-height: 1;
+    padding: .45rem .85rem;
+    border-radius: 8px 0 12px 0;
+    z-index: 3;
+    letter-spacing: .02em;
+}
+
+/* ── Card body ────────────────────────────────────────────────────── */
+.uxd-pp-card__body {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    flex: 1;
+}
+
+/* ── Title ─────────────────────────────────────────────────────────  */
+.uxd-pp-card__title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    line-height: 1.35;
+    margin: 0 0 12px;
+    color: #ffffff;
+}
+
+.uxd-pp-card__title a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.uxd-pp-card__title a:hover {
+    opacity: .85;
+}
+
+/* ── Price ─────────────────────────────────────────────────────────  */
+.uxd-pp-card__price {
+    display: flex;
+    align-items: baseline;
+    gap: .5rem;
+    flex-wrap: wrap;
+}
+
+.uxd-pp-card__price del,
+.uxd-pp-card__price del .amount {
+    color: #e8a020;
+    font-size: 1rem;
+    font-weight: 500;
+    opacity: .7;
+    text-decoration: line-through;
+}
+
+.uxd-pp-card__price ins,
+.uxd-pp-card__price ins .amount,
+.uxd-pp-card__price > .amount {
+    color: #e8a020;
+    font-size: 1.5rem;
+    font-weight: 800;
+    text-decoration: none;
+}
+
+.uxd-pp-card__price .amount {
+    color: #e8a020;
+    font-size: 1.5rem;
+    font-weight: 800;
+}
+
+/* ── Add to cart ────────────────────────────────────────────────── */
+.uxd-pp-card__actions .button {
+    width: 100%;
+    text-align: center;
+}
+
+/* ── Responsive ──────────────────────────────────────────────────── */
+@media (max-width: 1024px) {
+    .uxd-pp-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    .uxd-pp-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .uxd-pp-popup {
+        padding: 1.75rem 1.25rem;
+    }
+}
+
+/* ── Screen-reader only ──────────────────────────────────────────── */
+.screen-reader-text {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0,0,0,0);
+    white-space: nowrap;
+    border: 0;
+}
