@@ -27,6 +27,7 @@ class UXD_PP_Frontend {
 
         // ── Single product gate ───
         add_action( 'woocommerce_before_single_product', [ __CLASS__, 'gate_single_product' ] );
+        add_action( 'wp', [ __CLASS__, 'disable_caching_for_unlocked' ] );    
     }
 
     /* ── Widget query bypass ─────────────────────────────────────────────── */
@@ -57,6 +58,16 @@ class UXD_PP_Frontend {
         // WP core hashes the entered password into the cookie, so we check the 
         // plain-text DB password against the hash stored in the user's cookie.
         return $hasher->CheckPassword( $stored, wp_unslash( $cookie ) );
+    }
+
+    public static function disable_caching_for_unlocked() {
+        // If the user has access, tell caching plugins NOT to cache this personalized view
+        if ( self::has_access() ) {
+            if ( ! defined( 'DONOTCACHEPAGE' ) ) {
+                define( 'DONOTCACHEPAGE', true );
+            }
+            nocache_headers();
+        }
     }
 
     private static function grant_access( $plain_password ) {
